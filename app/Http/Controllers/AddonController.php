@@ -13,6 +13,7 @@ use DB;
 
 class AddonController extends Controller
 {
+    //contstruct 
     public function __construct() {
         // Staff Permission Check
         $this->middleware(['permission:manage_addons'])->only('index','create');
