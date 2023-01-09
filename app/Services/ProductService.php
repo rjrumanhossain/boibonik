@@ -214,6 +214,25 @@ class ProductService
             }
         }
         $collection['tags'] = implode(',', $tags);
+
+        //custom code Writer_id , subject_id, publihser id 
+
+        if ($collection['subject_id'][0] != null) {
+            $collection['subject_id'] = implode(',' , $collection['subject_id']);
+        }
+        
+    
+        
+        if ($collection['writer_id'][0] != null) {
+            $collection['writer_id'] = implode(',' , $collection['writer_id']);
+        }
+    
+
+        if ($collection['publisher_id'][0] != null) {
+            $collection['publisher_id'] = implode(',' , $collection['publisher_id']);
+        } 
+
+
         $discount_start_date = null;
         $discount_end_date   = null;
         if ($collection['date_range'] != null) {

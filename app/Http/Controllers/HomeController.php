@@ -27,6 +27,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Mail\SecondEmailVerifyMailManager;
+use App\Models\Publisher;
+use App\Models\Subject;
+use App\Models\Writer;
 
 class HomeController extends Controller
 {
@@ -286,6 +289,45 @@ class HomeController extends Controller
         $categories = Category::where('level', 0)->orderBy('order_level', 'desc')->get();
         return view('frontend.all_category', compact('categories'));
     }
+
+
+
+
+    
+    public function all_subjects(Request $request)
+    {
+        $subjects = Subject::orderBy('name', 'desc')->get();
+        return view('frontend.all_category', compact('subjects'));
+    }
+
+    public function all_writers(Request $request)
+    {
+        $writers = Writer::orderBy('name', 'desc')->get();
+        return view('frontend.all_category', compact('writers'));
+    }
+
+    public function all_publisher(Request $request)
+    {
+        $publisher = Publisher::orderBy('name', 'desc')->get();
+        return view('frontend.all_category', compact('publisher'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function all_brands(Request $request)
     {

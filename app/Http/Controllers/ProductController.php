@@ -319,10 +319,10 @@ class ProductController extends Controller
             '_token', 'sku', 'choice', 'tax_id', 'tax', 'tax_type', 'flash_deal_id', 'flash_discount', 'flash_discount_type'
         ]), $product);
 
-                $product->subject_id = $request->subject_id;
-        $product->writer_id = $request->writer_id;
-        $product->publisher_id = $request->publisher_id;
-        $product->save();
+        // $product->subject_id = $request->subject_id;
+        // $product->writer_id = $request->writer_id;
+        // $product->publisher_id = $request->publisher_id;
+        // $product->save();
 
         //Product Stock
         foreach ($product->stocks as $key => $stock) {

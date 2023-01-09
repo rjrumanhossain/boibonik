@@ -119,9 +119,9 @@
                         <div class="form-group row" id="subject">
                             <label class="col-md-3 col-from-label">{{translate('Subject')}} <span class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <select class="form-control aiz-selectpicker" name="subject_id"  data-live-search="true" required>
+                                <select class="form-control aiz-selectpicker" name="subject_id[]"  data-live-search="true" required multiple>
                                     @foreach ($subject as $subjects)
-                                    <option {{$product->subject_id == $subjects->id ? 'selected':''}} value="{{$subjects->id}}">{{$subjects->name}}</option>
+                                        <option value="{{$subjects->id}}" <?php echo (in_array($subjects->id, explode(',', $product->subject_id)) ? 'selected' : ''); ?>>{{$subjects->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -130,9 +130,9 @@
                         <div class="form-group row" id="Writter">
                             <label class="col-md-3 col-from-label">{{translate('Writter')}} <span class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <select class="form-control aiz-selectpicker" name="writer_id"  data-live-search="true" required>
+                                <select class="form-control aiz-selectpicker" name="writer_id[]"  data-live-search="true" required multiple>
                                    @foreach ($writter as $writters)
-                                     <option {{$product->writer_id == $writters->id ? 'selected':''}} value="{{$writters->id}}">{{$writters->name}}</option>
+                                   <option value="{{$writters->id}}" <?php echo (in_array($writters->id, explode(',', $product->writer_id)) ? 'selected' : ''); ?>>{{$writters->name}}</option>
                                    @endforeach
                                     
                                 </select>
@@ -142,10 +142,11 @@
                         <div class="form-group row" id="publisher">
                             <label class="col-md-3 col-from-label">{{translate('Publisher')}} <span class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <select class="form-control aiz-selectpicker" name="publisher_id" data-live-search="true" required>
+                                <select class="form-control aiz-selectpicker" name="publisher_id[]" data-live-search="true" required multiple>
                                     @foreach ($publisher as $publishers)
                                     @endforeach
-                                    <option {{$product->publisher_id == $publishers->id ? 'selected':''}} value=" {{$publishers->id}} ">{{$publishers->name}}</option>
+                                    <option value="{{ $publishers->id }}" <?php echo (in_array($publishers->id, explode(',', $product->publisher_id)) ? 'selected' : ''); ?>>{{$publishers->name}}</option>
+                                    
                                 </select>
                             </div>
                         </div>
