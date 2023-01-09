@@ -223,6 +223,20 @@
                                                     class="text-muted">
                                                     {{ $orderDetail->product->getTranslation('name') }}
                                                 </a>
+                                                <br>
+                                                @foreach ($writers = explode(',', $orderDetail->product->writer_id) as $writer_id) 
+                                                <?php echo writerNameLink($writer_id)?>
+                                                    @if (next($writers))
+                                                        {{','}}
+                                                    @endif
+                                                @endforeach
+                                                 <br>
+                                                @foreach ($subject = explode(',', $orderDetail->product->subject_id) as $subject_id) 
+                                                <?php echo subjectNameLink($subject_id)?>
+                                                    @if (next($subject))
+                                                        {{','}}
+                                                    @endif
+                                                @endforeach
                                             </strong>
                                             <small>
                                                 {{ $orderDetail->variation }}

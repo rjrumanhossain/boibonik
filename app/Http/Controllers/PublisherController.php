@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Publisher;
 use Illuminate\Http\Request;
-
+use Illuminate\support\Str;
 class PublisherController extends Controller
 {
     public function index(Request $request)
@@ -31,13 +31,12 @@ class PublisherController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:50',
-            'slug' => 'required|unique:publishers|max:255',
+            'name' => 'required|max:50'
         ]);
 
         $publisher = new Publisher();
         $publisher->name = $request->name;
-        $publisher->slug = $request->slug;
+        $publisher->slug = Str::slug($request->name);;
         if($publisher->save())
         {
             flash(translate('Publisher has been Adeed successfully'))->success();

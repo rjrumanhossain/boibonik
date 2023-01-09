@@ -31,7 +31,7 @@
                     <a class="text-reset" href="{{ route('product', $product->slug) }}">
                         <div class="d-flex search-product align-items-center">
                             <div class="mr-3">
-                                <img class="size-40px img-fit rounded" src="{{ uploaded_asset($product->thumbnail_img) }}">
+                                <img class="" style ="height:120px !important;width:80px;" src="{{ uploaded_asset($product->thumbnail_img) }}">
                             </div>
                             <div class="flex-grow-1 overflow--hidden minw-0">
                                 <div class="product-name text-truncate fs-14 mb-5px">
@@ -55,7 +55,7 @@
     <div class="">
         @if (count($shops) > 0)
             <div class="px-2 py-1 text-uppercase fs-10 text-right text-muted bg-soft-secondary">{{translate('Shops')}}</div>
-            <ul class="list-group list-group-raw">
+            <ul class="list-group list-group-raw" >
                 @foreach ($shops as $key => $shop)
                     <li class="list-group-item">
                         <a class="text-reset" href="{{ route('shop.visit', $shop->slug) }}">

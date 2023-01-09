@@ -116,36 +116,43 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row" id="subject">
-                            <label class="col-md-3 col-from-label">{{translate('Subject')}} <span class="text-danger">*</span></label>
+                            <label class="col-md-2 col-from-label">{{translate('Subject')}} <span class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <select class="form-control aiz-selectpicker" name="subject_id[]"  data-live-search="true" required multiple>
+                                <select class="form-control aiz-selectpicker selectpicker" id="select1" name="subject_id[]"  data-live-search="true" required multiple>
                                     @foreach ($subject as $subjects)
                                     <option value="{{$subjects->id}}">{{$subjects->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
+                                <div class="col-md-2">
+                                    <a href=" {{route('subject.added')}} " class=" btn btn-sm btn-primary"> <span class="footable-toggle fooicon fooicon-plus"></span> </a>
+                                </div>
                         </div>
-
                         <div class="form-group row" id="Writter">
-                            <label class="col-md-3 col-from-label">{{translate('Writter')}} <span class="text-danger">*</span></label>
+                            <label class="col-md-2 col-from-label">{{translate('Writter')}} <span class="text-danger">*</span></label>
                             <div class="col-md-8">
                                 <select class="form-control aiz-selectpicker" name="writer_id[]"  data-live-search="true" required multiple>
                                    @foreach ($writter as $writters)
                                      <option value="{{$writters->id}}">{{$writters->name}}</option>
                                    @endforeach
-                                    
                                 </select>
+                            </div>
+                            <div class="col-md-2">
+                                <a href=" {{route('writter.added')}} " class=" btn btn-sm btn-primary"> <span class="footable-toggle fooicon fooicon-plus"></span> </a>
                             </div>
                         </div>
 
                         <div class="form-group row" id="publisher">
-                            <label class="col-md-3 col-from-label">{{translate('Publisher')}} <span class="text-danger">*</span></label>
+                            <label class="col-md-2 col-from-label">{{translate('Publisher')}} <span class="text-danger">*</span></label>
                             <div class="col-md-8">
                                 <select class="form-control aiz-selectpicker" name="publisher_id[]" data-live-search="true" required multiple>
                                     @foreach ($publisher as $publishers)
                                     @endforeach
                                     <option value=" {{$publishers->id}} ">{{$publishers->name}}</option>
                                 </select>
+                            </div>
+                            <div class="col-md-2">
+                                <a href=" {{route('publisher.added')}} " class=" btn btn-sm btn-primary"> <span class="footable-toggle fooicon fooicon-plus"></span> </a>
                             </div>
                         </div>
                     </div>
@@ -694,6 +701,18 @@
         </div>
     </form>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 @endsection
 

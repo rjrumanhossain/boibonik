@@ -34,6 +34,7 @@ class CartController extends Controller
             $carts = ($temp_user_id != null) ? Cart::where('temp_user_id', $temp_user_id)->get() : [] ;
         }
 
+        
         return view('frontend.view_cart', compact('carts'));
     }
 

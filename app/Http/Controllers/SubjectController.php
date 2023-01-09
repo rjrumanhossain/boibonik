@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class SubjectController extends Controller
 {
    
@@ -22,13 +22,12 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:50',
-            'slug' => 'required|unique:subjects|max:255',
+            'name' => 'required|max:50'
         ]);
 
         $subject = new Subject();
         $subject->name = $request->name;
-        $subject->slug = $request->slug;
+        $subject->slug = Str::slug($request->name);;
         if($subject->save())
         {
             flash(translate('Subject has been Adeed successfully'))->success();

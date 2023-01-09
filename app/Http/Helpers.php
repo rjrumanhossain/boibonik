@@ -1349,4 +1349,47 @@ if (!function_exists('subjectName')) {
     }
 
 }
+if (!function_exists('subjectNameLink')) {
+
+    function subjectNameLink($subject_id)
+    {
+        $subject = Subject::where('id', $subject_id)->first();
+
+        
+        if (isset($subject) && isset( $subject->name)) {
+            return '<a href="'.route('books.subject', $subject->slug).'" style="font-size: 12px !important">'.$subject->name.'</a>';
+        } else {
+            return '-';
+        }
+    }
+
+}
+if (!function_exists('publisherNameLink')) {
+
+    function publisherNameLink($publisher_id)
+    {
+        $publisher = Publisher::where('id', $publisher_id)->first();
+
+        
+        if (isset($publisher) && isset( $publisher->name)) {
+            return '<a href="'.route('books.publisher', $publisher->slug).'" style="font-size: 12px !important">'.$publisher->name.'</a>';
+        } else {
+            return '-';
+        }
+    }
+
+}
+if (!function_exists('writerNameLink')) {
+
+    function writerNameLink($writer_id)
+    {
+        $writer = Writer::where('id', $writer_id)->first();
+        if (isset($writer) && isset( $writer->name)) {
+            return '<a href="'.route('books.writer', $writer->slug).'" style="font-size: 12px !important">'.$writer->name.'</a>';
+        } else {
+            return '-';
+        }
+    }
+
+}
 

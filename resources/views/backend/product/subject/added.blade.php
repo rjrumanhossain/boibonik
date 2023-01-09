@@ -22,12 +22,12 @@
                             <input type="text" placeholder="{{translate('Name')}}" id="name" name="name" class="form-control" required>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-md-3 col-form-label">{{translate('Slug')}}</label>
                         <div class="col-md-9">
                             <input type="text" placeholder="{{translate('Slug')}}" id="name" name="slug" class="form-control" required>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group mb-0 text-right">
                         <button type="submit" class="btn btn-primary">{{translate('Save')}}</button>
                     </div>

@@ -50,6 +50,8 @@
                                         <i class="las la-times la-2x"></i>
                                     </button>
                                 </div>
+
+                                @if (isset($category_id))
                                 <div class="bg-white shadow-sm rounded mb-3">
                                     <div class="fs-15 fw-600 p-3 border-bottom">
                                         <a href="#collapse_1" class="dropdown-toggle filter-section text-dark" data-toggle="collapse">
@@ -94,6 +96,73 @@
                                         </ul>
                                     </div>
                                 </div>
+                                @endif
+                                
+
+                                @if (isset($writter_id))
+                                <div class="bg-white shadow-sm rounded mb-3">
+                                    <div class="fs-15 fw-600 p-3 border-bottom">
+                                        <a href="#collapse_1" class="dropdown-toggle filter-section text-dark" data-toggle="collapse">
+                                            {{ translate('All Writers')}}
+                                        </a>
+                                    </div>
+                                    <div class="collapse show" id="collapse_1">
+                                        <ul class="p-3 list-unstyled">
+                                            @foreach (\App\Models\Writer::all() as $writer)
+                                                <li class="mb-2 ml-2">
+                                                    <a class="text-reset fs-14" href="{{ route('books.writer', $writer->slug) }}">{{ $writer->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                                @endif
+                                {{-- writer --}}
+                                
+
+                                @if (isset($publisher_id))
+                                <div class="bg-white shadow-sm rounded mb-3">
+                                    <div class="fs-15 fw-600 p-3 border-bottom">
+                                        <a href="#collapse_1" class="dropdown-toggle filter-section text-dark" data-toggle="collapse">
+                                            {{ translate('All Publisher')}}
+                                        </a>
+                                    </div>
+                                    <div class="collapse show" id="collapse_1">
+                                        <ul class="p-3 list-unstyled">
+                                                @foreach (\App\Models\Publisher::all() as $publisher)
+                                                    <li class="mb-2 ml-2">
+                                                        <a class="text-reset fs-14" href="{{ route('books.publisher', $publisher->slug) }}">{{ $publisher->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                                @endif
+                                
+
+                                @if (isset($subject_id))
+                                <div class="bg-white shadow-sm rounded mb-3">
+                                    <div class="fs-15 fw-600 p-3 border-bottom">
+                                        <a href="#collapse_1" class="dropdown-toggle filter-section text-dark" data-toggle="collapse">
+                                            {{ translate('All Subjects')}}
+                                        </a>
+                                    </div>
+                                    <div class="collapse show" id="collapse_1">
+                                        <ul class="p-3 list-unstyled">
+                                                @foreach (\App\Models\Subject::all() as $subject)
+                                                    <li class="mb-2 ml-2">
+                                                        <a class="text-reset fs-14" href="{{ route('books.subject', $subject->slug) }}">{{ $subject->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                                @endif
+                                
+
+
+
                                 <div class="bg-white shadow-sm rounded mb-3">
                                     <div class="fs-15 fw-600 p-3 border-bottom">
                                         {{ translate('Price range')}}
@@ -136,7 +205,7 @@
                                     </div>
                                 </div>
 
-                                @foreach ($attributes as $attribute)
+                                {{-- @foreach ($attributes as $attribute)
                                     <div class="bg-white shadow-sm rounded mb-3">
                                         <div class="fs-15 fw-600 p-3 border-bottom">
                                             <a href="#" class="dropdown-toggle text-dark filter-section collapsed" data-toggle="collapse" data-target="#collapse_{{ str_replace(' ', '_', $attribute->name) }}">
@@ -160,9 +229,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                @endforeach --}}
 
-                                @if (get_setting('color_filter_activation'))
+                                {{-- @if (get_setting('color_filter_activation'))
                                     <div class="bg-white shadow-sm rounded mb-3">
                                         <div class="fs-15 fw-600 p-3 border-bottom">
                                             <a href="#" class="dropdown-toggle text-dark filter-section collapsed" data-toggle="collapse" data-target="#collapse_color">
@@ -188,7 +257,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
+                                @endif --}}
 
                                 {{-- <button type="submit" class="btn btn-styled btn-block btn-base-4">Apply filter</button> --}}
                             </div>
@@ -200,20 +269,42 @@
                             <li class="breadcrumb-item opacity-50">
                                 <a class="text-reset" href="{{ route('home') }}">{{ translate('Home')}}</a>
                             </li>
-                            @if(!isset($category_id))
-                                <li class="breadcrumb-item fw-600  text-dark">
-                                    <a class="text-reset" href="{{ route('search') }}">"{{ translate('All Categories')}}"</a>
-                                </li>
-                            @else
-                                <li class="breadcrumb-item opacity-50">
-                                    <a class="text-reset" href="{{ route('search') }}">{{ translate('All Categories')}}</a>
-                                </li>
-                            @endif
                             @if(isset($category_id))
+                            <li class="breadcrumb-item fw-600  text-dark">
+                                <a class="text-reset" href="{{ route('search') }}">"{{ translate('All Categories')}}"</a>
+                            </li>
                                 <li class="text-dark fw-600 breadcrumb-item">
                                     <a class="text-reset" href="{{ route('products.category', \App\Models\Category::find($category_id)->slug) }}">"{{ \App\Models\Category::find($category_id)->getTranslation('name') }}"</a>
                                 </li>
                             @endif
+                            @if(isset($writter_id))
+                            <li class="breadcrumb-item fw-600  text-dark">
+                                <a class="text-reset" href="{{ route('search') }}">"{{ translate('All Writters')}}"</a>
+                            </li>
+                            <li class="text-dark fw-600 breadcrumb-item">
+                                <a class="text-reset" href="{{ route('products.category', \App\Models\Writer::find($writter_id)->slug) }}">"{{ \App\Models\Writer::find($writter_id)->name }}"</a>
+                            </li>
+                            @endif
+
+                            @if(isset($subject_id))
+                                <li class="breadcrumb-item fw-600  text-dark">
+                                    <a class="text-reset" href="{{ route('search') }}">"{{ translate('All Subjects')}}"</a>
+                                </li>
+                                <li class="text-dark fw-600 breadcrumb-item">
+                                    <a class="text-reset" href="{{ route('products.category', \App\Models\Subject::find($subject_id)->slug) }}">"{{ \App\Models\Subject::find($subject_id)->name }}"</a>
+                                </li>
+                            @endif
+
+                            @if(isset($publisher_id))
+                                <li class="breadcrumb-item fw-600  text-dark">
+                                    <a class="text-reset" href="{{ route('search') }}">"{{ translate('All Publisher')}}"</a>
+                                </li>
+                                <li class="text-dark fw-600 breadcrumb-item">
+                                    <a class="text-reset" href="{{ route('products.category', \App\Models\Publisher::find($publisher_id)->slug) }}">"{{ \App\Models\Publisher::find($publisher_id)->name }}"</a>
+                                </li>
+                            @endif
+
+                            
                         </ul>
 
                         <div class="text-left">
@@ -235,7 +326,7 @@
                                         <i class="la la-filter la-2x"></i>
                                     </button>
                                 </div>
-                                <div class="col-6 col-lg-auto mb-3 w-lg-200px">
+                                {{-- <div class="col-6 col-lg-auto mb-3 w-lg-200px">
                                     @if (Route::currentRouteName() != 'products.brand')
                                         <label class="mb-0 opacity-50">{{ translate('Brands')}}</label>
                                         <select class="form-control form-control-sm aiz-selectpicker" data-live-search="true" name="brand" onchange="filter()">
@@ -245,7 +336,7 @@
                                             @endforeach
                                         </select>
                                     @endif
-                                </div>
+                                </div> --}}
                                 <div class="col-6 col-lg-auto mb-3 w-lg-200px">
                                     <label class="mb-0 opacity-50">{{ translate('Sort by')}}</label>
                                     <select class="form-control form-control-sm aiz-selectpicker" name="sort_by" onchange="filter()">

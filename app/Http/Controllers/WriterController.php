@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Writer;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class WriterController extends Controller
 {
     public function index()
@@ -27,13 +27,12 @@ class WriterController extends Controller
     {
 
         $validated = $request->validate([
-            'name' => 'required|max:50',
-            'slug' => 'required|unique:writers|max:255',
+            'name' => 'required|max:50'
         ]);
 
         $writter = new Writer();
         $writter->name = $request->name;
-        $writter->slug = $request->slug;
+        $writter->slug = Str::slug($request->name);
         if($writter->save())
         {
             flash(translate('Writter has been Adeed successfully'))->success();

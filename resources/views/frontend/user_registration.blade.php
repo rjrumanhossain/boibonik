@@ -25,7 +25,7 @@
                                             @endif
                                         </div>
 
-                                        @if (addon_is_activated('otp_system'))
+                                        @if (addon_is_activated('otp_system') )
                                             <div class="form-group phone-form-group mb-1">
                                                 <input type="tel" id="phone-code" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" value="{{ old('phone') }}" placeholder="" name="phone" autocomplete="off">
                                             </div>
@@ -53,7 +53,20 @@
                                                     </span>
                                                 @endif
                                             </div>
-                                        @endif
+                                             <div class="form-group phone-form-group mb-1">
+                                                <input type="tel" id="phone-code" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" value="{{ old('phone') }}" placeholder="" name="phone" autocomplete="off">
+                                                @if ($errors->has('phone'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('phone') }}</strong>
+                                                </span>
+                                            @endif
+                                            
+                                            </div>
+
+                                            <input type="hidden" name="country_code" value="">                                  
+                                        
+                                        
+                                            @endif
 
                                         <div class="form-group">
                                             <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{  translate('Password') }}" name="password">

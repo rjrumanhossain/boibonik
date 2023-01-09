@@ -1737,6 +1737,11 @@ hr {
 }
 /* sm */
 @media (min-width: 576px) {
+
+
+    
+
+
     .border-sm {
         border: 1px solid #e2e5ec !important;
     }
@@ -7311,7 +7316,12 @@ input[type="number"] {
         max-width: 100%;
         height: auto;
     }
+    .hideMobile{
+        display: none !important;
+    }
 }
+
+
 .aiz-editor-data img {
     max-width: 100% !important;
     height: auto !important;

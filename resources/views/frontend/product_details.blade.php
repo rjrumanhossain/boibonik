@@ -108,11 +108,42 @@
                                         $total = 0;
                                         $total += $detailedProduct->reviews->count();
                                     @endphp
-                                    <span class="rating">
+                                    {{-- <span class="rating">
                                         {{ renderStarRating($detailedProduct->rating) }}
-                                    </span>
-                                    <span class="ml-1 opacity-50">({{ $total }}
-                                        {{ translate('reviews') }})</span>
+                                    </span> --}}
+
+
+                                    <p style="font-size: 12px !important">
+                                        Writer :
+                                            @foreach ($writers = explode(',', $detailedProduct->writer_id) as $writer_id) 
+                                            
+                                            <?php echo writerNameLink($writer_id)?>
+                                                @if (next($writers))
+                                                    {{','}}
+                                                @endif
+                                            @endforeach
+                                    </p>
+                                    <p style="font-size: 12px !important">
+                                        Publisher :
+                                             @foreach ($publishers = explode(',', $detailedProduct->publisher_id) as $publisher_id) 
+                                             <?php echo  publisherNameLink($publisher_id)?>
+                                                @if (next($publishers))
+                                                    {{','}}
+                                                @endif
+                                             @endforeach
+                                    </p>
+                                    <p style="font-size: 12px !important">
+                                        Subject :
+                                       
+                                            @foreach ($subjecs = explode(',', $detailedProduct->subject_id) as $subject_id) 
+                                           <?php echo subjectNameLink($subject_id)?>
+                                            @if (next($subjecs))
+                                                {{','}}
+                                            @endif
+                                         @endforeach
+                                    </p>
+                                    {{-- <span class="ml-1 opacity-50">({{ $total }}
+                                        {{ translate('reviews') }})</span> --}}
                                 </div>
                                 @if ($detailedProduct->est_shipping_days)
                                     <div class="col-auto ml">
@@ -564,9 +595,18 @@
                                                     <a href="{{ route('product', $top_product->slug) }}"
                                                         class="d-block text-reset">{{ $top_product->getTranslation('name') }}</a>
                                                 </h4>
-                                                <div class="rating rating-sm mt-1">
+                                                {{-- <div class="rating rating-sm mt-1">
                                                     {{ renderStarRating($top_product->rating) }}
-                                                </div>
+                                                </div> --}}
+                                                <p>
+                                                    @foreach ($writers = explode(',', $detailedProduct->writer_id) as $writer_id) 
+                                            
+                                                    <?php echo writerNameLink($writer_id)?>
+                                                        @if (next($writers))
+                                                            {{','}}
+                                                        @endif
+                                                    @endforeach
+                                                </p>
                                                 <div class="mt-2">
                                                     <span
                                                         class="fs-17 fw-600 text-primary">{{ home_discounted_base_price($top_product) }}</span>
@@ -710,9 +750,19 @@
                                                     <span
                                                         class="fw-700 text-primary">{{ home_discounted_base_price($related_product) }}</span>
                                                 </div>
-                                                <div class="rating rating-sm mt-1">
+                                                {{-- <div class="rating rating-sm mt-1">
                                                     {{ renderStarRating($related_product->rating) }}
-                                                </div>
+                                                </div> --}}
+                                                <p>
+                                                    @foreach ($writers = explode(',', $detailedProduct->writer_id) as $writer_id) 
+                                            
+                                                    <?php echo writerNameLink($writer_id)?>
+                                                        @if (next($writers))
+                                                            {{','}}
+                                                        @endif
+                                                    @endforeach
+                                                </p>
+                                                
                                                 <h3 class="fw-600 fs-13 text-truncate-2 lh-1-4 mb-0 h-35px">
                                                     <a href="{{ route('product', $related_product->slug) }}"
                                                         class="d-block text-reset">{{ $related_product->getTranslation('name') }}</a>

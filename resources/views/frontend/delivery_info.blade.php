@@ -95,11 +95,31 @@
                                             <span class="mr-2">
                                                 <img
                                                     src="{{ uploaded_asset($product->thumbnail_img) }}"
-                                                    class="img-fit size-60px rounded"
+                                                    class="img-fit" style="height: 100px;"
                                                     alt="{{  $product->getTranslation('name')  }}"
                                                 >
                                             </span>
-                                            <span class="fs-14 opacity-60">{{ $product->getTranslation('name') }}</span>
+                                            <span class="fs-14 opacity-60 mt-2">{{ $product->getTranslation('name') }}
+                                            <br>
+                                            @foreach ($writers = explode(',', $product->writer_id) as $writer_id) 
+                                            <?php echo writerNameLink($writer_id)?>
+                                                @if (next($writers))
+                                                    {{','}}
+                                                @endif
+                                            @endforeach
+                                             <br>
+                                            @foreach ($subject = explode(',', $product->subject_id) as $subject_id) 
+                                            <?php echo subjectNameLink($subject_id)?>
+                                                @if (next($subject))
+                                                    {{','}}
+                                                @endif
+                                            @endforeach
+                                            
+                                            
+                                            </span>
+                                           
+                                            
+                                       
                                         </div>
                                     </li>
                                 @endforeach

@@ -123,7 +123,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/flash-deals', 'all_flash_deals')->name('flash-deals');
     Route::get('/flash-deal/{slug}', 'flash_deal_details')->name('flash-deal-details');
 
-    Route::get('/product/{slug}', 'product')->name('product');
+    Route::get('/book/{slug}', 'product')->name('product');
     Route::post('/product/variant_price', 'variant_price')->name('products.variant_price');
     Route::get('/shop/{slug}', 'shop')->name('shop.visit');
     Route::get('/shop/{slug}/{type}', 'filter_shop')->name('shop.visit.type');
@@ -132,6 +132,13 @@ Route::controller(HomeController::class)->group(function () {
 
     Route::get('/brands', 'all_brands')->name('brands.all');
     Route::get('/categories', 'all_categories')->name('categories.all');
+
+    //custom subject, writer, publisher route
+    Route::get('/writer', 'all_writers')->name('writer.all');
+    Route::get('/subject','all_subjects')->name('subject.all');
+    Route::get('/publisher','all_publishers')->name('publisher.all');
+
+
     Route::get('/sellers', 'all_seller')->name('sellers');
     Route::get('/coupons', 'all_coupons')->name('coupons.all');
     Route::get('/inhouse', 'inhouse_products')->name('inhouse.all');
@@ -160,11 +167,11 @@ Route::get('/sitemap.xml', function() {
 
 // Classified Product
 Route::controller(CustomerProductController::class)->group(function () {
-    Route::get('/customer-products', 'customer_products_listing')->name('customer.products');
-    Route::get('/customer-products?category={category_slug}', 'search')->name('customer_products.category');
-    Route::get('/customer-products?city={city_id}', 'search')->name('customer_products.city');
-    Route::get('/customer-products?q={search}', 'search')->name('customer_products.search');
-    Route::get('/customer-product/{slug}', 'customer_product')->name('customer.product');
+    Route::get('/customer-books', 'customer_products_listing')->name('customer.products');
+    Route::get('/customer-books?category={category_slug}', 'search')->name('customer_products.category');
+    Route::get('/customer-books?city={city_id}', 'search')->name('customer_products.city');
+    Route::get('/customer-books?q={search}', 'search')->name('customer_products.search');
+    Route::get('/customer-book/{slug}', 'customer_product')->name('customer.product');
 });
 
 // Search
@@ -173,7 +180,15 @@ Route::controller(SearchController::class)->group(function () {
     Route::get('/search?keyword={search}', 'index')->name('suggestion.search');
     Route::post('/ajax-search', 'ajax_search')->name('search.ajax');
     Route::get('/category/{category_slug}', 'listingByCategory')->name('products.category');
+    Route::get('/writer/{slug}', 'listingByWriter')->name('books.writer');
+    Route::get('/publisher/{slug}', 'listingByPublisher')->name('books.publisher');
+    Route::get('/subject/{slug}', 'listingBySubject')->name('books.subject');
+
+
+    
     Route::get('/brand/{brand_slug}', 'listingByBrand')->name('products.brand');
+
+    
 });
 
 // Cart

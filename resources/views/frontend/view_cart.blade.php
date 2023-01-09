@@ -81,10 +81,28 @@
                                                 <div class="col-lg-5 d-flex">
                                                     <span class="mr-2 ml-0">
                                                         <img src="{{ uploaded_asset($product->thumbnail_img) }}"
-                                                            class="img-fit size-60px rounded"
+                                                            class="img-fit rounded" style="height: 100px;"
                                                             alt="{{ $product->getTranslation('name') }}">
                                                     </span>
-                                                    <span class="fs-14 opacity-60">{{ $product_name_with_choice }}</span>
+                                                    <span class="fs-14 opacity-60">{{ $product_name_with_choice }}
+                                                    
+                        
+                                                        <br>
+                                                        @foreach ($writers = explode(',', $product->writer_id) as $writer_id) 
+                                                        <?php echo writerNameLink($writer_id)?>
+                                                            @if (next($writers))
+                                                                {{','}}
+                                                            @endif
+                                                        @endforeach
+                                                         <br>
+                                                        @foreach ($subject = explode(',', $product->subject_id) as $subject_id) 
+                                                        <?php echo subjectNameLink($subject_id)?>
+                                                            @if (next($subject))
+                                                                {{','}}
+                                                            @endif
+                                                        @endforeach
+                                                    
+                                                    </span>
                                                 </div>
 
                                                 <div class="col-lg col-4 order-1 order-lg-0 my-3 my-lg-0">

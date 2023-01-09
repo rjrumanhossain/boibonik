@@ -11,11 +11,14 @@ use App\Models\Color;
 use App\Models\Shop;
 use App\Models\Attribute;
 use App\Models\AttributeCategory;
+use App\Models\Publisher;
+use App\Models\Subject;
+use App\Models\Writer;
 use App\Utility\CategoryUtility;
 
 class SearchController extends Controller
 {
-    public function index(Request $request, $category_id = null, $brand_id = null)
+    public function index(Request $request, $category_id = null, $brand_id = null, $writter_id = null, $subject_id = null, $publisher_id = null)
     {
         $query = $request->keyword;
         $sort_by = $request->sort_by;
@@ -41,6 +44,17 @@ class SearchController extends Controller
         // }
 
         $products = Product::where($conditions);
+
+
+        if ($writter_id != null) {
+            $products->whereRaw("FIND_IN_SET($writter_id,writer_id)");
+        }
+        if ($subject_id != null) {
+            $products->whereRaw("FIND_IN_SET($subject_id,subject_id)");
+        }
+        if ($publisher_id != null) {
+            $products->whereRaw("FIND_IN_SET($publisher_id,publisher_id)");
+        }
 
         if ($category_id != null) {
             $category_ids = CategoryUtility::children_ids($category_id);
@@ -134,7 +148,7 @@ class SearchController extends Controller
 
         $products = filter_products($products)->with('taxes')->paginate(12)->appends(request()->query());
 
-        return view('frontend.product_listing', compact('products', 'query', 'category_id', 'brand_id', 'sort_by', 'seller_id', 'min_price', 'max_price', 'attributes', 'selected_attribute_values', 'colors', 'selected_color'));
+        return view('frontend.product_listing', compact('products', 'query', 'category_id', 'brand_id', 'sort_by', 'seller_id', 'min_price', 'max_price', 'attributes', 'selected_attribute_values', 'colors', 'selected_color','writter_id','subject_id','publisher_id'));
     }
 
     public function listing(Request $request)
@@ -147,6 +161,35 @@ class SearchController extends Controller
         $category = Category::where('slug', $category_slug)->first();
         if ($category != null) {
             return $this->index($request, $category->id);
+        }
+        abort(404);
+    }
+
+    public function listingByWriter(Request $request, $slug)
+    {
+        $writer = Writer::where('slug', $slug)->first();
+
+        if ($writer != null) {
+            return $this->index($request, null, null, $writer->id);
+        }
+
+        abort(404);
+    }
+    public function listingByPublisher(Request $request, $slug)
+    {
+        $publisher = Publisher::where('slug', $slug)->first();
+
+        if ($publisher != null) {
+            return $this->index($request,null, null, null, null, $publisher->id);
+        }
+        abort(404);
+    }
+    public function listingBySubject(Request $request, $slug)
+    {
+        $subject = Subject::where('slug', $slug)->first();
+
+        if ($subject != null) {
+            return $this->index($request, null, null, null, $subject->id);
         }
         abort(404);
     }
@@ -203,9 +246,9 @@ class SearchController extends Controller
                 WHEN name LIKE '$case2' THEN 2 
                 ELSE 3 
                 END");
-        $products = $products_query->limit(3)->get();
+        $products = $products_query->get();
 
-        $categories = Category::where('name', 'like', '%' . $query . '%')->get()->take(3);
+        $categories = Category::where('name', 'like', '%' . $query . '%')->get();
 
         $shops = Shop::whereIn('user_id', verified_sellers_id())->where('name', 'like', '%' . $query . '%')->get()->take(3);
 

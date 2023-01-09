@@ -22,9 +22,9 @@
                                     </span>
                                 @endif
                             </div>
+                          
                             <div class="form-group">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="{{ translate('password') }}">
-
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -40,9 +40,13 @@
                                     </span>
                                 @endif
                             </div>
+                         
                             <div class="form-group">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="{{ translate('Confrim Password') }}">
                             </div>
+
+
+
                             <div class="checkbox pad-btm text-left">
                                 <input id="demo-form-checkbox" class="magic-checkbox" type="checkbox" required>
                                 <label for="demo-form-checkbox">{{translate('I agree with the Terms and Conditions')}}</label>

@@ -11,7 +11,8 @@
         @endphp
         <a href="{{ $product_url }}" class="d-block">
             <img
-                class="img-fit lazyload mx-auto h-140px h-md-210px"
+            
+                class="img-fit lazyload mx-auto h-auto h-md-210px"
                 src="{{ static_asset('assets/img/placeholder.jpg') }}"
                 data-src="{{ uploaded_asset($product->thumbnail_img) }}"
                 alt="{{  $product->getTranslation('name')  }}"
@@ -42,12 +43,22 @@
             @endif
             <span class="fw-700 text-primary">{{ home_discounted_base_price($product) }}</span>
         </div>
-        <div class="rating rating-sm mt-1">
+        {{-- <div class="rating rating-sm mt-1">
             {{ renderStarRating($product->rating) }}
-        </div>
+        </div> --}}
         <h3 class="fw-600 fs-13 text-truncate-2 lh-1-4 mb-0 h-35px">
             <a href="{{ $product_url }}" class="d-block text-reset">{{  $product->getTranslation('name')  }}</a>
         </h3>
+    <br>
+        <p>
+            @foreach ($writers = explode(',', $product->writer_id) as $writer_id) 
+                                            
+            <?php echo writerNameLink($writer_id)?>
+                @if (next($writers))
+                    {{','}}
+                @endif
+            @endforeach
+        </p>
         @if (addon_is_activated('club_point'))
             <div class="rounded px-2 mt-2 bg-soft-primary border-soft-primary border">
                 {{ translate('Club Point') }}:

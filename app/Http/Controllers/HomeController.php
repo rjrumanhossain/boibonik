@@ -293,42 +293,24 @@ class HomeController extends Controller
 
 
 
-    
+
     public function all_subjects(Request $request)
     {
         $subjects = Subject::orderBy('name', 'desc')->get();
-        return view('frontend.all_category', compact('subjects'));
+        return view('frontend.all_subject', compact('subjects'));
     }
 
     public function all_writers(Request $request)
     {
         $writers = Writer::orderBy('name', 'desc')->get();
-        return view('frontend.all_category', compact('writers'));
+        return view('frontend.all_writer', compact('writers'));
     }
 
-    public function all_publisher(Request $request)
+    public function all_publishers(Request $request)
     {
-        $publisher = Publisher::orderBy('name', 'desc')->get();
-        return view('frontend.all_category', compact('publisher'));
+        $publishers = Publisher::orderBy('name', 'desc')->get();
+        return view('frontend.all_publisher', compact('publishers'));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function all_brands(Request $request)
     {
         $categories = Category::all();
